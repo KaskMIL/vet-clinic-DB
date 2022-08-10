@@ -32,7 +32,7 @@ SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHE
 SELECT animals.name, species.name FROM animals JOIN species on animals.species_id = species.id WHERE species.name LIKE '%Pokemon%';
 SELECT owners.full_name, animals.name FROM owners FULL OUTER JOIN animals ON owners.id = animals.owner_id;
 SELECT species.name, COUNT(*) FROM animals JOIN species ON animals.species_id = species.id GROUP BY species.id;
-SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name LIKE '%Jennifer Orwell%';
+SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name LIKE '%Jennifer Orwell%' AND animals.species_id = 2;
 SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.fu
 ll_name LIKE '%Dean Winchester%' AND animals.escape_attempts = 0;
 SELECT owners.full_name AS "Owner Name", COUNT(animals.name) AS "Num of Animals" FROM owners JOIN animals ON owners.id = animals.owner_id GROUP BY owners.full_name ORDER BY COUNT(animals.name) DESC LIMIT 1;
