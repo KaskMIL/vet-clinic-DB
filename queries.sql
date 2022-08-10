@@ -20,7 +20,7 @@ UPDATE animals SET weight_kg = weight_kg * -1;
 ROLLBACK TO first_delete;
 UPDATE animals SET weight_kg = weight_kg * -1 WHERE weight_kg < 0;
 SELECT COUNT(*) FROM animals;
-SELECT COUNT(*) FROM animals GROUP BY escape_attempts HAVING escape_attempts = 0;
+SELECT neutered, MAX(escape_attempts) AS escapeAttempts FROM animals GROUP BY neutered;
 SELECT AVG(weight_kg) FROM animals;
 SELECT neutered, COUNT(*) FROM animals GROUP BY neutered;
 SELECT species, MAX(weight_kg) AS maxWeight, MIN(weight_kg) AS minWeight FROM animals GROUP BY species;
