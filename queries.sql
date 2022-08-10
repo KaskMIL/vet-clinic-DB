@@ -28,7 +28,7 @@ SELECT neutered, COUNT(*) FROM animals GROUP BY neutered;
 SELECT species, MAX(weight_kg) AS maxWeight, MIN(weight_kg) AS minWeight FROM animals GROUP BY species;
 SELECT species, AVG(escape_attempts) AS avgscapes FROM animals WHERE date_of_birth BETWEEN '1990-01-01' AND '2000-12-31' GROUP BY species;
 
-SELECT animals.name, animals.owner_id, owners.full_name, owners.id FROM animals JOIN owners ON owner_id = owners.id WHERE owners.full_name LIKE '%Melody Pond%';
+SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name LIKE '%Melody Pond%';
 SELECT animals.name, species.name FROM animals JOIN species on animals.species_id = species.id WHERE species.name LIKE '%Pokemon%';
 SELECT owners.full_name, animals.name FROM owners FULL OUTER JOIN animals ON owners.id = animals.owner_id;
 SELECT species.name, COUNT(*) FROM animals JOIN species ON animals.species_id = species.id GROUP BY species.id;
