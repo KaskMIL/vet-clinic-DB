@@ -41,7 +41,6 @@ SELECT owners.full_name AS "Owner Name", COUNT(animals.name) AS "Num of Animals"
 SELECT vets.name AS "Vet Name", animals.name AS "Animal Name", visits.date FROM vets JOIN visits ON vets.id = visits.vet_id JOIN animals ON animals.id = visits.animal_id WHERE vets.name LIKE '%William Tatcher%' GROUP BY vets.name, animals.name, visits.date ORDER BY visits.date DESC LIMIT 1;
 
 /*How many different animals did Stephanie Mendez see?*/
-SELECT vets.name AS "Vet Name", animals.name AS "Animal Name", visits.date FROM vets JOIN visits ON vets.id = visits.vet_id JOIN animals ON animals.id = visits.animal_id WHERE vets.name LIKE '%William Tatcher%' GROUP BY vets.name, animals.name, visits.date ORDER BY visits.date DESC LIMIT 1;
 SELECT COUNT(animals.name) AS "Stephanie Mendez's Animals" FROM animals JOIN visits on animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Stephanie Mendez%';
 
 /*List all vets and their specialties, including vets with no specialties.
@@ -57,7 +56,7 @@ SELECT animals.name AS "Animal Name", COUNT(visits.animal_id) AS "Number of Visi
 /*Who was Maisy Smith's first visit?*/
 SELECT animals.name AS "Animal name", visits.date AS "Date" FROM animals JOIN visits on animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Maisy Smith%' GROUP BY animals.name, visits.date ORDER BY visits.date ASC LIMIT 1;
 
-/*Who was Maisy Smith's first visit?*/
+/*Details for most recent visit: animal information, vet information, and date of visit.*/
 SELECT animals.name AS "Animal Name", animals.date_of_birth AS "Date of Birth", animals.escape_attempts AS "Escape Attemts", animals.neutered AS "Neutered", animals.weight_kg AS "Weight", owners.full_name AS "Owner", species.name AS "Specie", vets.name AS "Vet Name", vets.age AS "Age", vets.date_of_graduation, visits.date AS "Date" FROM animals JOIN owners ON animals.owner_id = owners.id JOIN species ON animals.species_id = species.id JOIN visits ON animals.id = visits.animal_id JOIN vets on visits.vet_id = vets.id GROUP BY animals.name, animals.date_of_birth, animals.escape_attempts, animals.neutered, animals.weight_kg, owners.full_name, species.name, vets.name, vets.age, vets.date_of_graduation, visits.date ORDER BY visits.date desc LIMIT 1;
 
 /*How many visits were with a vet that did not specialize in that animal's species?*/
