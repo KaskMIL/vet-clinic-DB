@@ -37,19 +37,31 @@ SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHE
 ll_name LIKE '%Dean Winchester%' AND animals.escape_attempts = 0;
 SELECT owners.full_name AS "Owner Name", COUNT(animals.name) AS "Num of Animals" FROM owners JOIN animals ON owners.id = animals.owner_id GROUP BY owners.full_name ORDER BY COUNT(animals.name) DESC LIMIT 1;
 
+/*Who was the last animal seen by William Tatcher?*/
+SELECT vets.name AS "Vet Name", animals.name AS "Animal Name", visits.date FROM vets JOIN visits ON vets.id = visits.vet_id JOIN animals ON animals.id = visits.animal_id WHERE vets.name LIKE '%William Tatcher%' GROUP BY vets.name, animals.name, visits.date ORDER BY visits.date DESC LIMIT 1;
+
+/*How many different animals did Stephanie Mendez see?*/
 SELECT vets.name AS "Vet Name", animals.name AS "Animal Name", visits.date FROM vets JOIN visits ON vets.id = visits.vet_id JOIN animals ON animals.id = visits.animal_id WHERE vets.name LIKE '%William Tatcher%' GROUP BY vets.name, animals.name, visits.date ORDER BY visits.date DESC LIMIT 1;
 SELECT COUNT(animals.name) AS "Stephanie Mendez's Animals" FROM animals JOIN visits on animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Stephanie Mendez%';
 
+/*List all vets and their specialties, including vets with no specialties.
+*/
 SELECT vets.name AS "Vet Name", species.name AS "specialization" FROM vets FULL OUTER JOIN specializations ON vets.id = specializations.vets_id FULL OUTER JOIN species ON species.id = specializations.species_id GROUP BY vets.name, species.name;
 
+/*List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.*/
 SELECT animals.name AS "Animal Name", visits.date AS "Date" FROM animals JOIN visits ON animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Stephanie Mendez%' AND visits.date BETWEEN '2020-04-01' AND '2020-08-30' GROUP BY animals.name, visits.date;
 
+/*What animal has the most visits to vets?*/
 SELECT animals.name AS "Animal Name", COUNT(visits.animal_id) AS "Number of Visits" FROM animals JOIN visits ON animals.id = visits.animal_id GROUP BY animals.name ORDER BY COUNT(visits.animal_id) DESC LIMIT 1;
 
+/*Who was Maisy Smith's first visit?*/
 SELECT animals.name AS "Animal name", visits.date AS "Date" FROM animals JOIN visits on animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Maisy Smith%' GROUP BY animals.name, visits.date ORDER BY visits.date ASC LIMIT 1;
 
+/*Who was Maisy Smith's first visit?*/
 SELECT animals.name AS "Animal Name", animals.date_of_birth AS "Date of Birth", animals.escape_attempts AS "Escape Attemts", animals.neutered AS "Neutered", animals.weight_kg AS "Weight", owners.full_name AS "Owner", species.name AS "Specie", vets.name AS "Vet Name", vets.age AS "Age", vets.date_of_graduation, visits.date AS "Date" FROM animals JOIN owners ON animals.owner_id = owners.id JOIN species ON animals.species_id = species.id JOIN visits ON animals.id = visits.animal_id JOIN vets on visits.vet_id = vets.id GROUP BY animals.name, animals.date_of_birth, animals.escape_attempts, animals.neutered, animals.weight_kg, owners.full_name, species.name, vets.name, vets.age, vets.date_of_graduation, visits.date ORDER BY visits.date desc LIMIT 1;
 
+/*How many visits were with a vet that did not specialize in that animal's species?*/
 SELECT vets.name AS "Vet Name", COUNT(visits.animal_id) FROM vets LEFT JOIN specializations ON vets.id = specializations.vets_id LEFT JOIN species ON species.id = specializations.species_id LEFT JOIN visits ON vets.id = visits.vet_id WHERE species.name IS NULL GROUP BY vets.name;
 
+/*What specialty should Maisy Smith consider getting? Look for the species she gets the most.*/
 SELECT species.name AS "Species", COUNT(animals.name) AS "Count" FROM animals JOIN species ON animals.species_id = species.id JOIN visits ON animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Maisy Smith%' GROUP BY species.name ORDER BY COUNT(animals.name) DESC LIMIT 1;
