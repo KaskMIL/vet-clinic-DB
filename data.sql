@@ -18,3 +18,5 @@ UPDATE animals SET owner_id = 2 WHERE name LIKE '%Gabumon%' OR name LIKE '%Pikac
 UPDATE animals SET owner_id = 3 WHERE name LIKE '%Devimon%' OR name LIKE '%Plantmon%';
 UPDATE animals SET owner_id = 4 WHERE name LIKE '%Blossom%' OR name LIKE '%Squirtle%' OR name LIKE '%Charmander%';
 UPDATE animals SET owner_id = 5 WHERE name LIKE '%Boarmon%' OR name LIKE '%Angemon%';
+
+INSERT INTO vets (name, age, date_of_graduation) VALUES ('William Tatcher', 45, '2000-4-23'), ('Maisy Smith', 26, '2019-01-17'), ('Stephanie Mendez', 64, '1981-05-04'), ('Jack Harkness', 38, '2008-01-08');
