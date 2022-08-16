@@ -64,3 +64,12 @@ SELECT vets.name AS "Vet Name", COUNT(visits.animal_id) FROM vets LEFT JOIN spec
 
 /*What specialty should Maisy Smith consider getting? Look for the species she gets the most.*/
 SELECT species.name AS "Species", COUNT(animals.name) AS "Count" FROM animals JOIN species ON animals.species_id = species.id JOIN visits ON animals.id = visits.animal_id JOIN vets ON vets.id = visits.vet_id WHERE vets.name LIKE '%Maisy Smith%' GROUP BY species.name ORDER BY COUNT(animals.name) DESC LIMIT 1;
+
+/*Add indexes*/
+CREATE INDEX animal_id_ix ON visits(animal_id ASC);
+CREATE INDEX vet_id_ix ON visits(vet_id ASC);
+CREATE INDEX owner_email_ix ON owners(email);
+
+EXPLAIN ANALYZE SELECT COUNT(*) FROM visits WHERE animal_id = 4;
+EXPLAIN ANALYZE SELECT * FROM visits WHERE vet_id = 2;
+EXPLAIN ANALYZE SELECT * FROM owners where email = 'owner_18327@mail.com';
